@@ -1,4 +1,12 @@
 //todo object creator
 
-//create todo class/ff
+class Todo
+
+//create function for setting deadline
+
+//create function for setting status
+
+//create function for adding notes
+
+
 

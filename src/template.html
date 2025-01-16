@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20,400,0,0&icon_names=add_circle" />    
+    <!--<link rel = "stylesheet" href = "./fa-icons/css/solid.css";>-->
+    <title>TaskList</title>
 </head>
 <body>
     <div class="container">
@@ -15,14 +17,31 @@
                 <h1 class="name">tasklist</h1>
             </div>
             <div class = "timeNav">
-                <button>New Task</button>
-                <button>Today</button>
-                <button>Upcoming</button>
-                <button>Anytime</button>
-                <button>Overdue</button>
+                <button>
+                    <i class="fa-regular fa-square-plus nav-icons"></i> 
+                     New Task
+                </button>
+                <button>
+                    <i class = "fa-solid fa-list-check nav-icons"></i>
+                    All Tasks
+                </button>
+                <button> 
+                    <i class="fa-regular fa-calendar-day nav-icons"></i>
+                    Today
+                </button>
+                <button>
+                    <i class="fa-regular fa-calendar-days nav-icons"></i>
+                    Upcoming
+                </button>
+                <button>
+                    <i class="fa-regular fa-clock nav-icons"></i>
+                    Overdue
+                </button>
             </div>
-            <ul class="projectNav">
-            </ul>
+            <div class="projectNav">
+                <h2>Projects</h2>
+                <button><i class="fa-regular fa-square-plus nav-icons"></i> New Project</button>
+            </div>
         </div>
         <div class="main">
         </div>
