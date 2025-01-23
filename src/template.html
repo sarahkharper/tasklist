@@ -17,10 +17,44 @@
                 <h1 class="name">tasklist</h1>
             </div>
             <div class = "timeNav">
-                <button>
-                    <i class="fa-regular fa-square-plus nav-icons"></i> 
-                     New Task
-                </button>
+                    <button class = "form-expand-btn">
+                        <i class="fa-regular fa-square-plus nav-icons"></i>
+                         New Task
+                    </button>
+                    <div class = "form-box">
+                        <!--<dialog open>-->
+                            <form action="" id="nav-new-task-form">
+                                <!--<h2>New Book</h2>-->
+                                <label for="nameInput"></label>
+                                <input type="text" name="taskName" id="nameInput" placeholder="Task Name (required)">
+                                <label for="deadline"></label>
+                                <input type="text" 
+                                    id="deadline" 
+                                    name="deadline" 
+                                    placeholder="Deadline (optional)" 
+                                    onfocus="(this.type='date')"
+                                />
+                                <label for="priorityInput"></label>
+                                <select name="priority" id="priorityInput">
+                                    <option value="none">No Priority</option>
+                                    <option value="high">High</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="low">Low</option>
+                                </select>
+                                <label for="projectInput"></label>
+                                <select name="project" id="projectInput">
+                                    <option value="default">General Tasks</option>
+                                </select>
+                                <label for="noteInput"></label>
+                                <textarea rows="20" cols="60" id="noteInput" name="notes" placeholder="Notes (optional)"></textarea>
+                                <div class = "nav-form-button-container">
+                                    <button type = "button" class = "close-btn">Close</button>
+                                    <button type = "submit">Add Task</button>
+                                </div>
+
+                            </form>
+                        <!--</dialog>-->
+                    </div>
                 <button>
                     <i class = "fa-solid fa-list-check nav-icons"></i>
                     All Tasks
