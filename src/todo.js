@@ -1,47 +1,68 @@
+
+//import {toggleShow} from "./DOM-manip.js";
+const datefns = require('date-fns');
+
 //todo object creator
 
-function basicTodo (n, pri, proj){
-    const name = n;
-    const priority = pri;
-    const project = proj;
+export function createTodo (todo){
+    /*change empty fields to null
+    for(let[key] of todo) {
+        if(todo[key] === ''){
+            todo[key] = null;
+        }
+    }*/
+
+    //add uuid
+    todo = {...todo, key: crypto.randomUUID()};
     let isComplete = false;
 
-    const changeComplete = () => {
+    //format deadline date
+    if(todo.deadline){
+        const rawDate = new Date(todo.deadline);
+        const formattedDate = datefns.format(rawDate, 'MM/dd/yyyy');
+        todo.deadline = formattedDate;
+    }
+
+    todo.changeComplete = () => { //function to change completion status
         isComplete = !isComplete
         return isComplete;
     };
 
-    const getState = () => isComplete;
-
-    return {name, priority, project, changeComplete, getState};
-};
-
-//create function for adding deadline to todo object
-function addDeadline(todo, deadline){ //takes todo (or other) object as input
-    return Object.assign({}, todo, { deadline });
-}
-
-//create function for adding notes
-function addNotes(todo, notes){
-    return Object.assign({}, todo, { notes });
-}
-
-//function for actually assemblying a todo with designated properties
-export function createTodo (name, priority, deadline = null, project = 'misc', notes = null){
-    let todo = basicTodo(name, priority, project); //make basic todo
-    
-    //add deadline field to object
-    if (deadline !== undefined){
-        todo = addDeadline(todo, deadline);
-    }
-    
-    //if notes present, add notes field to object
-    if (notes !== undefined){
-        todo = addNotes(todo, notes);
-    }
+    todo.getState = () => isComplete; //function to get completion status
     
     return todo;
 };
 
-export const greeting = "Hello!";
+export function addObjToArray(arrayName, objName){
+    arrayName.push(objName);
+}
 
+export function submitForm(form, type, arrayName){
+    form.addEventListener("submit", (event) =>{
+        event.preventDefault();
+        if(type === "todo"){
+            const todo = todoFromForm(form);
+            console.log(todo);
+            addObjToArray(arrayName, todo);
+            console.log(arrayName);
+        }
+    })
+}
+
+export function todoFromForm(form){
+    //add submit event listener to get todo data from form
+        const todoData = objFromForm(form);
+        console.log(todoData);
+        const todo = createTodo(todoData);
+        return todo;
+}
+
+//export function projFromForm()
+
+export function objFromForm(form){
+    const formData = new FormData(form);
+    console.log(formData);
+    const obj = Object.fromEntries(formData);
+    console.log(obj);
+    return obj;
+}

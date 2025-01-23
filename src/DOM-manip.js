@@ -1,7 +1,7 @@
 
 //event listener to toggle 'show' class for form expand buttons
 
-export function toggleShow(elem, type){
+export function toggleShow(elem, type, event){
     if (type === "open"){
         var formContainer = elem.nextElementSibling;
     } else if (type === "close"){
@@ -9,7 +9,7 @@ export function toggleShow(elem, type){
     }
     const formRef = formContainer.querySelector("form");
 
-    elem.addEventListener("click", () => {
+    elem.addEventListener(event, () => {
         formContainer.classList.toggle("show");
         formRef.reset();
     })
