@@ -51,7 +51,6 @@
                                     <button type = "button" class = "close-btn">Close</button>
                                     <button type = "submit">Add Task</button>
                                 </div>
-
                             </form>
                         <!--</dialog>-->
                     </div>
@@ -74,7 +73,21 @@
             </div>
             <div class="projectNav">
                 <h2>Projects</h2>
-                <button><i class="fa-regular fa-square-plus nav-icons"></i> New Project</button>
+                <button class = "form-expand-btn">
+                    <i class="fa-regular fa-square-plus nav-icons"></i> 
+                    New Project
+                </button>
+                <div class = "form-box">
+                    <!--<dialog open>-->
+                        <form action="" id="nav-new-proj-form">
+                            <label for="projName"></label>
+                                <input type="text" name="projName" id="projName" placeholder="Name (required)">
+                                <div class = "nav-form-button-container">
+                                    <button type = "button" class = "close-btn">Close</button>
+                                    <button type = "submit">Add Project</button>
+                                </div>
+                        </form>
+                </div>
             </div>
         </div>
         <div class="main">

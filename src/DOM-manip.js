@@ -14,3 +14,6 @@ export function toggleShow(elem, type, event){
         formRef.reset();
     })
 }
+
+//add projects to sidebar once created
+//function makeNewElem(item, )

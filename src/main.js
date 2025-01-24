@@ -5,10 +5,15 @@ import {createTodo, todoFromForm, submitForm} from "./todo.js";
 import * as domManip from "./DOM-manip.js";
 
 const todoList = [];
+const projList = [];
 
 const formTodo = document.querySelector('#nav-new-task-form');
 submitForm(formTodo, "todo", todoList);
 domManip.toggleShow(formTodo, "close", "submit");
+
+const formProj = document.querySelector('#nav-new-proj-form');
+submitForm(formProj, "project", projList);
+domManip.toggleShow(formProj, "close", "submit");
 
 const test = createTodo('Test', 'High', 'Now', 'Home', 'Testing');
 console.log(test)
