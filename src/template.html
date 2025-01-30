@@ -18,7 +18,7 @@
             </div>
             <div class = "timeNav">
                     <button class = "form-expand-btn">
-                        <i class="fa-regular fa-square-plus nav-icons"></i>
+                        <i class="fa-solid fa-square-plus nav-icons"></i>
                          New Task
                     </button>
                     <div class = "form-box">
@@ -26,7 +26,7 @@
                             <form action="" id="nav-new-task-form">
                                 <!--<h2>New Book</h2>-->
                                 <label for="nameInput"></label>
-                                <input type="text" name="taskName" id="nameInput" placeholder="Task Name (required)">
+                                <input type="text" name="name" id="nameInput" placeholder="Task Name (required)">
                                 <label for="deadline"></label>
                                 <input type="text" 
                                     id="deadline" 
@@ -44,6 +44,9 @@
                                 <label for="projectInput"></label>
                                 <select name="project" id="projectInput">
                                     <option value="default">General Tasks</option>
+                                    <optgroup label = "Projects">
+
+                                    </optgroup>
                                 </select>
                                 <label for="noteInput"></label>
                                 <textarea rows="20" cols="60" id="noteInput" name="notes" placeholder="Notes (optional)"></textarea>
@@ -59,29 +62,33 @@
                     All Tasks
                 </button>
                 <button> 
-                    <i class="fa-regular fa-calendar-day nav-icons"></i>
+                    <i class="fa-solid fa-calendar-day nav-icons"></i>
                     Today
                 </button>
                 <button>
-                    <i class="fa-regular fa-calendar-days nav-icons"></i>
+                    <i class="fa-solid fa-calendar-days nav-icons"></i>
                     Upcoming
                 </button>
                 <button>
-                    <i class="fa-regular fa-clock nav-icons"></i>
+                    <i class="fa-solid fa-clock nav-icons"></i>
                     Overdue
                 </button>
             </div>
             <div class="projectNav">
                 <h2>Projects</h2>
                 <button class = "form-expand-btn">
-                    <i class="fa-regular fa-square-plus nav-icons"></i> 
+                    <i class="fa-solid fa-square-plus nav-icons"></i> 
                     New Project
                 </button>
                 <div class = "form-box">
                     <!--<dialog open>-->
                         <form action="" id="nav-new-proj-form">
                             <label for="projName"></label>
-                                <input type="text" name="projName" id="projName" placeholder="Name (required)">
+                                <input type="text" name="name" id="projName" placeholder="Name (required)">
+                                <div class = "side-by-side">
+                                    <label for = "colorInput">Color: </label>
+                                    <input type = "color" id = "colorInput" name = "colorInput" value="#00fbff">
+                                </div>
                                 <div class = "nav-form-button-container">
                                     <button type = "button" class = "close-btn">Close</button>
                                     <button type = "submit">Add Project</button>
@@ -91,6 +98,10 @@
             </div>
         </div>
         <div class="main">
+            <h1></h1>
+            <div id="todo-container">
+
+            </div>
         </div>
     </div>
 </body>

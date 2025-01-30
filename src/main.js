@@ -5,18 +5,16 @@ import {createTodo, todoFromForm, submitForm} from "./todo.js";
 import * as domManip from "./DOM-manip.js";
 
 const todoList = [];
-const projList = [];
+
+domManip.updateUI(todoList);
 
 const formTodo = document.querySelector('#nav-new-task-form');
 submitForm(formTodo, "todo", todoList);
 domManip.toggleShow(formTodo, "close", "submit");
 
 const formProj = document.querySelector('#nav-new-proj-form');
-submitForm(formProj, "project", projList);
+submitForm(formProj, "project", todoList);
 domManip.toggleShow(formProj, "close", "submit");
-
-const test = createTodo('Test', 'High', 'Now', 'Home', 'Testing');
-console.log(test)
 
 //add expand listener to all expand buttons
 const expandBtns = document.querySelectorAll('.form-expand-btn');

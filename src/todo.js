@@ -1,18 +1,12 @@
 import {projFromForm} from './project-creation.js';
+import {updateUI} from './DOM-manip.js';
 //import {toggleShow} from "./DOM-manip.js";
 const datefns = require('date-fns');
 
 //todo object creator
 
 export function createTodo (todo){
-    /*change empty fields to null
-    for(let[key] of todo) {
-        if(todo[key] === ''){
-            todo[key] = null;
-        }
-    }*/
-
-    //todo = {...todo, key: crypto.randomUUID()};
+    
     todo = {...todo};
     
     let isComplete = false;
@@ -23,10 +17,15 @@ export function createTodo (todo){
         return uuid;
     }
 
+    //add function to get type
+    todo.getType = () => {
+        return "todo";
+    }
+
     //format deadline date
     if(todo.deadline){
         const rawDate = new Date(todo.deadline);
-        const formattedDate = datefns.format(rawDate, 'MM/dd/yyyy');
+        const formattedDate = datefns.format(rawDate, 'MM-dd-yyyy');
         todo.deadline = formattedDate;
     }
 
@@ -55,6 +54,7 @@ export function submitForm(form, type, arrayName){
         console.log(todo);
         addObjToArray(arrayName, todo);
         console.log(arrayName);
+        updateUI(arrayName);
     })
 }
 
@@ -73,3 +73,4 @@ export function objFromForm(form){
     console.log(obj);
     return obj;
 }
+

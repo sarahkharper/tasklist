@@ -16,9 +16,12 @@ function createProj(proj){
     proj.getUUID = () => {
         return uuid;
     }
+
+    proj.getType = () => {
+        return "project";
+    }
+
     return proj;
 }
-
-//create function to add new "project" name to array of projects
 
 //create function to delete projects (include going back to main task list if deleted project is current display)
