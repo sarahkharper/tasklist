@@ -2,7 +2,7 @@ import {updateUI} from "./DOM-manip.js";
 
 //function for changing status of todo item
 export function toggleCompletionStatus(checkbox, array){
-    checkbox.addEventListener("change", () => {
+    checkbox.addEventListener('change', function(e) {
         //get parent todo
         const todo = checkbox.closest(".todo");
         const uuid = todo.className.split(' ')[0];
@@ -15,6 +15,10 @@ export function toggleCompletionStatus(checkbox, array){
         updateUI(array);
         console.log(array);
    })
+}
+
+export function toggleCheck(checkbox){
+    checkbox.classList.toggle("show-check");
 }
 
 export function findObjIdx(uuid, array){

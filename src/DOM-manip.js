@@ -1,4 +1,4 @@
-import { toggleCompletionStatus } from './change-status';
+import { toggleCompletionStatus, toggleCheck } from './change-status';
 
 const datefns = require('date-fns');
 
@@ -164,9 +164,15 @@ export function addTodoToScreen(obj, array){
     //set background color according to priority
     checkbox.style.backgroundColor = priColor;
     elem.insertBefore(checkboxContainer, elem.firstChild);
-    //add event listener to checkbox
+    //add event listeners to checkbox
     toggleCompletionStatus(checkbox, array); 
     //check if todo is complete and check if complete
+    console.log(obj.getState());
+    if(obj.getState()){
+        checkbox.checked = true;
+    } else {
+        checkbox.checked = false;
+    }
 
     //format deadline (if present)
     if(obj.deadline.length !== 0) {
