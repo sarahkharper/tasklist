@@ -17,8 +17,12 @@ export function toggleCompletionStatus(checkbox, array){
    })
 }
 
-export function toggleCheck(checkbox){
-    checkbox.classList.toggle("show-check");
+export function toggleCheck(obj, checkbox){
+    if(obj.getState()){
+        checkbox.checked = true;
+    } else {
+        checkbox.checked = false;
+    }
 }
 
 export function findObjIdx(uuid, array){

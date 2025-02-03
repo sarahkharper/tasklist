@@ -151,6 +151,7 @@ export function addTodoToScreen(obj, array){
     //make new todo element and remove extraneous content
     const elem = makeNewElem(obj);
     removeChildBySelector(elem, ".priority");
+    //elem.classList.add("form-box");
     /*removeChildBySelector(elem, ".project");*/
 
     //create checkbox that reflects todo's priority (in color)
@@ -167,12 +168,7 @@ export function addTodoToScreen(obj, array){
     //add event listeners to checkbox
     toggleCompletionStatus(checkbox, array); 
     //check if todo is complete and check if complete
-    console.log(obj.getState());
-    if(obj.getState()){
-        checkbox.checked = true;
-    } else {
-        checkbox.checked = false;
-    }
+    toggleCheck(obj, checkbox);
 
     //format deadline (if present)
     if(obj.deadline.length !== 0) {
@@ -196,7 +192,15 @@ export function addTodoToScreen(obj, array){
         projElem.appendChild(projIcon);
     }
     
-    //add and format notes (if present)
+    //add edit button
+    //const editBtn = document.createElement("button");
+    const btnColor = window.getComputedStyle(document.body).getPropertyValue('--accent-color-1');
+    const editIcon = makeIcon(["fa-solid", "fa-pen"], btnColor);
+    editIcon.classList.add('edit-button');
+    elem.appendChild(editIcon);
+    //editBtn.appendChild(editIcon);
+    //make edit button hide todo item and show form
+    toggleEdit
 
     todoContainer.appendChild(elem);
 }
@@ -232,4 +236,9 @@ function makeIcon(iconParams, color){
     projIcon.classList.add(...iconParams); //add classes
     projIcon.style.color = color;    //make icon color match selected project color
     return projIcon;
+}
+
+function toggleEdit(editIcon){
+    //write code to hide todo/project display
+    //write code to show todo/project edit form
 }
