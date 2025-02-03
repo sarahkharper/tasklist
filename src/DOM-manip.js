@@ -1,3 +1,5 @@
+import { toggleCompletionStatus } from './change-status';
+
 const datefns = require('date-fns');
 
 //determine which todos will show on page load
@@ -93,6 +95,7 @@ export function updateUI(array){
                 break;
             case "todo":
                 addTodoToScreen(obj, array);
+                //addTodoEdit(obj, array);
                 break;
         }
     }
@@ -156,10 +159,13 @@ export function addTodoToScreen(obj, array){
     checkbox.type = "checkbox";
     checkbox.name = "markComplete";
     checkbox.id = `${uuid}_check`;
+    checkbox.classList.add("change-status-box");
     checkboxContainer.appendChild(checkbox);
     //set background color according to priority
     checkbox.style.backgroundColor = priColor;
     elem.insertBefore(checkboxContainer, elem.firstChild);
+    //add event listener to checkbox
+    toggleCompletionStatus(checkbox, array); 
     //check if todo is complete and check if complete
 
     //format deadline (if present)

@@ -27,3 +27,10 @@ const closeBtns = document.querySelectorAll('.close-btn');
 closeBtns.forEach(closeBtn => {
     domManip.toggleShow(closeBtn, "close", "click");
 })
+
+//add completion status modifier to all checkboxes
+//const checkboxes = document.querySelectorAll(".change-status-box");
+//checkboxes.forEach(checkbox => {
+    //toggleCompletionStatus(checkbox, todoList);
+   
+//});
