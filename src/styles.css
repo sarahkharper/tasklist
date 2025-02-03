@@ -336,7 +336,7 @@
             &::before{
                 content: '\f058';
                 font-family: 'Font Awesome 6 Free';
-                color: rgb(238, 238, 238);
+                color: gray;
                 position: absolute;
                 font-weight: 900;
                 font-size: 0.8em;
