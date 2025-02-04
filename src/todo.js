@@ -24,8 +24,11 @@ export function createTodo (todo){
 
     //format deadline date
     if(todo.deadline){
-        const rawDate = new Date(todo.deadline);
+        console.log(todo.deadline);
+        const rawDate = new Date(todo.deadline.replace(/-/g, '\/').replace(/T.+/, ''));
+        console.log(rawDate);
         const formattedDate = datefns.format(rawDate, 'MM-dd-yyyy');
+        console.log(formattedDate);
         todo.deadline = formattedDate;
     }
 

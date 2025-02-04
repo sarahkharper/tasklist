@@ -205,6 +205,10 @@ export function addTodoToScreen(obj, array){
     todoContainer.appendChild(elem);
 }
 
+export function addTodoEditForm(obj){
+    
+}
+
 //function to color code elements by project
 function setColorByProject(obj, array){
     const projects = array.filter((project) => project.getType() === "project");
