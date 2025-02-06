@@ -1,6 +1,10 @@
+/*import { getFreePort } from 'webpack-dev-server';*/
 import { toggleCompletionStatus, toggleCheck } from './change-status';
 
 const datefns = require('date-fns');
+
+//create object storing priority levels and associated colors
+const priObj = {high: "#FF6464", medium: "#FFE162", low: "#91c483", none: "#EEEEEE"};
 
 //determine which todos will show on page load
 let displayCond = "default";
@@ -143,9 +147,12 @@ function filterOptgroups(projOpt) {
   }
 
 //function to show tasks on screen (incl. parameters to filter by project or date)
-export function addTodoToScreen(obj, array){
+export function addTodoToScreen(obj, array, priObj){
     const todoContainer = document.querySelector("#todo-container");
-    const priColor = setColorByPriority(obj); //get color to go with object priority
+    const itemContainer = document.createElement("div");
+    itemContainer.classList.add("todo-entry");
+    todoContainer.appendChild(itemContainer);
+    const priColor = setColorByPriority(obj, priObj); //get color to go with object priority
     const uuid = obj.getUUID();
 
     //make new todo element and remove extraneous content
@@ -200,13 +207,71 @@ export function addTodoToScreen(obj, array){
     elem.appendChild(editIcon);
     //editBtn.appendChild(editIcon);
     //make edit button hide todo item and show form
-    toggleEdit
+    
+    itemContainer.appendChild(elem);
 
-    todoContainer.appendChild(elem);
+    //add edit form to item
+    const editForm = addTodoEditForm(obj);
+    itemContainer.appendChild(editForm);
 }
 
 export function addTodoEditForm(obj){
+    const formEdit = document.createElement("form");
+    formEdit.classList.add(`${obj.getUUID()}`);
+    formEdit.classList.add("todo");
+
+    //make text input to edit todo name
+    const nameEdit = createNewInput("text", "name", obj.name);
+    formEdit.appendChild(nameEdit);
+
+    //make date input to edit deadline
+    const deadlineEdit = createNewInput("date", "deadline", obj.deadline);
+    formEdit.appendChild(deadlineEdit);
+
+    //make note input to edit notes
+    const noteEdit = createNewInput("textarea", "notes", obj.notes);
+    formEdit.appendChild(noteEdit);
+
+    //make priority radio button input to edit priority
+    const priorityEdit = document.createElement("fieldset"); //make fieldset wrapping buttons
+    priorityEdit.classList.add("priority-radios");
+    //add button for each priority level
+    keys = Object.keys(priObj);
+    values = Object.values(priObj);
+    for(let i = 0; i < Object.keys(priObj).length; i++){
+        let priBtn = createNewInput("radio", "priority", keys[i]);
+        priBtn.style.backgroundColor(values[i]);
+        priorityEdit.appendChild(priBtn);
+    }
     
+
+    return(formEdit);
+}
+
+function createNewInput(type, name, placeholder){
+    if (type == "textarea"){
+        var newInput = document.createElement("textarea");
+    } else {
+        var newInput = document.createElement("input");
+        if (type != "date"){
+            newInput.setAttribute("type", type);
+        } else {
+            newInput.setAttribute("type", "text");
+            newInput.onfocus = function(){
+                this.type = "date";
+            }
+        }
+    }
+    newInput.setAttribute("name", name);
+    if(placeholder == ""){
+        newInput.setAttribute("placeholder", `Add ${name}`);
+    } else if(type == "radio"){
+        newInput.setAttribute("value", placeholder);
+    }else {
+        newInput.setAttribute("placeholder", placeholder);
+    }
+    newInput.classList.add(`${name}`);
+    return newInput;
 }
 
 //function to color code elements by project
@@ -219,7 +284,14 @@ function setColorByProject(obj, array){
 //function to select color to go with priority
 function setColorByPriority(obj){
     let priColor;
-    switch(obj.priority){
+    for (let [key, value] of Object.entries(priObj)){
+        console.log([key, value]);
+        console.log(obj.priority);
+        if (key == obj.priority){
+            priColor = value;
+        }
+    }
+    /*switch(obj.priority){
         case "high":
             priColor = "#FF6464";
             break;
@@ -231,7 +303,7 @@ function setColorByPriority(obj){
             break;
         default:
             priColor = "#EEEEEE";
-    }
+    }*/
     return(priColor);
 }
 

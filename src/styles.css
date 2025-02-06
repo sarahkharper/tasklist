@@ -318,7 +318,7 @@
         margin-left: 75px;
         margin-bottom: 20px;
 
-        & input[type="checkbox"]{
+        & .change-status-box{
             appearance: none;
             position: relative;
             width: 1em;
@@ -386,3 +386,28 @@
             font-size: 0.9rem;
         }
     }
+
+input[type = "radio"]{
+    appearance: none;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    border: 1px solid gray;
+    vertical-align: -3.5px;
+    border-radius: 10px;
+
+    &::before{
+        content: '\f192';
+        font-family: 'Font Awesome 6 Free';
+        color: gray;
+        position: absolute;
+        font-weight: 900;
+        font-size: 0.8em;
+        right: 1px;
+        visibility: hidden;
+    }
+
+    &:checked::before{
+        visibility: visible;
+    }
+}
