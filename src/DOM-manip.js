@@ -1,4 +1,3 @@
-/*import { getFreePort } from 'webpack-dev-server';*/
 import { toggleCompletionStatus, toggleCheck } from './change-status';
 
 const datefns = require('date-fns');
@@ -235,16 +234,16 @@ export function addTodoEditForm(obj){
     //make priority radio button input to edit priority
     const priorityEdit = document.createElement("fieldset"); //make fieldset wrapping buttons
     priorityEdit.classList.add("priority-radios");
+    formEdit.appendChild(priorityEdit);
     //add button for each priority level
-    keys = Object.keys(priObj);
-    values = Object.values(priObj);
+    const keys = Object.keys(priObj);
+    const values = Object.values(priObj);
     for(let i = 0; i < Object.keys(priObj).length; i++){
         let priBtn = createNewInput("radio", "priority", keys[i]);
-        priBtn.style.backgroundColor(values[i]);
+        priBtn.style.backgroundColor = values[i];
         priorityEdit.appendChild(priBtn);
     }
     
-
     return(formEdit);
 }
 
