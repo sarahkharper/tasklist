@@ -241,15 +241,35 @@ export function addTodoEditForm(obj){
     for(let i = 0; i < Object.keys(priObj).length; i++){
         let priBtn = createNewInput("radio", "priority", keys[i]);
         priBtn.style.backgroundColor = values[i];
+        //set object's current priority to be selected on load
+        if(keys[i] == obj.priority){
+            priBtn.checked = true;
+        }
         priorityEdit.appendChild(priBtn);
     }
+
+    //make dropdown to select project
+    const projectEdit = createNewInput("select", "project", "");
+    formEdit.appendChild(projectEdit);
+    //add options for all projects
     
+    //add close button
+    const closeBtn = createNewInput("button", "close", "Cancel");
+    closeBtn.classList.add("close-btn");
+    formEdit.appendChild(closeBtn);
+
+    //add submit button
+    const submitEdit = createNewInput("submit", "submit", "Save");
+    formEdit.appendChild(submitEdit);
+
     return(formEdit);
 }
 
 function createNewInput(type, name, placeholder){
     if (type == "textarea"){
         var newInput = document.createElement("textarea");
+    } else if (type == "select") {
+        var newInput = document.createElement("select");
     } else {
         var newInput = document.createElement("input");
         if (type != "date"){
@@ -262,15 +282,24 @@ function createNewInput(type, name, placeholder){
         }
     }
     newInput.setAttribute("name", name);
+    const capname = capitalizeFirstLetter(name);
     if(placeholder == ""){
-        newInput.setAttribute("placeholder", `Add ${name}`);
-    } else if(type == "radio"){
+        newInput.setAttribute("placeholder", `Add ${capname}`);
+    } else if(type == "radio" | type == "submit" | type == "button"){
         newInput.setAttribute("value", placeholder);
     }else {
         newInput.setAttribute("placeholder", placeholder);
     }
     newInput.classList.add(`${name}`);
     return newInput;
+}
+
+//function to capitalize letter of string
+export function capitalizeFirstLetter(strng){
+    const targetLetter = strng.charAt(0).toUpperCase();
+    const remainder = strng.slice(1);
+    const capitalizedWord = targetLetter + remainder;
+    return capitalizedWord;
 }
 
 //function to color code elements by project
@@ -284,8 +313,6 @@ function setColorByProject(obj, array){
 function setColorByPriority(obj){
     let priColor;
     for (let [key, value] of Object.entries(priObj)){
-        console.log([key, value]);
-        console.log(obj.priority);
         if (key == obj.priority){
             priColor = value;
         }

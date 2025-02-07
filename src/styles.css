@@ -268,8 +268,7 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 5px;
 
-        & button[type = "button"]{
-            background-color: lightgray;
+        & .close-btn{
             grid-column: 1/span 1;
         }
 
@@ -277,6 +276,10 @@
             background-color: var(--accent-color-3);
             grid-column: 2/span 1;
         }
+    }
+
+    button.close-btn{
+        background-color: lightgray;
     }
 
     optgroup[label="Projects"]{
@@ -316,10 +319,16 @@
         font-weight: 700;
     }
 
+    .main{
+        display: grid;
+        grid-template-columns: 1fr 5fr 2fr; 
+    }
+
     .todo-entry{
-        margin-left: 70px;
+        grid-column: 2 / span 1;
+        /*margin-left: auto;
         margin-bottom: 15px;
-        margin-right: 70px;
+        margin-right: auto;*/
     }
 
     .todo{
@@ -399,6 +408,7 @@
         }
 
         form& {
+            grid-template-columns: 20px repeat(3, 1fr);
             row-gap: 5px;
             background-color: var(--nav-hover-color);
             border-radius: 10px;
@@ -407,6 +417,38 @@
                 width: 150px;
                 height: 30px;
                 align-self: center;
+            }
+
+            &.project{
+                grid-column: 3/span2;
+            }
+
+            & input[type ="button"], input[type="submit"]{
+                border: 0px white;
+                border-radius: 5px;
+                background-color: var(--nav-background-color);
+                padding: 5px 0px 5px 10px;
+                text-align: start;
+                font-size: 1em;
+                width: 100px;
+                height: 35px;
+                font-size: 0.75rem;
+                color: white;
+                display: block;
+                text-align: center;
+                padding:5px;
+            }
+
+            & input[type ="button"]{
+                grid-column: 3/span1;
+                grid-row: 3/span1;
+                background-color: lightgray;
+            }
+
+            & input[type = "submit"]{
+                grid-column: 4/span1;
+                grid-row: 3/span1;
+                background-color: var(--accent-color-2);
             }
         }
     }
