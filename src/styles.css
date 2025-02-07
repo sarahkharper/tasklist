@@ -322,6 +322,7 @@
     .main{
         display: grid;
         grid-template-columns: 1fr 5fr 2fr; 
+        font-family: var(--nav-content-font);
     }
 
     .todo-entry{
@@ -408,7 +409,7 @@
         }
 
         form& {
-            grid-template-columns: 20px repeat(3, 1fr);
+            grid-template-columns: 20px repeat(3, minmax(150px, 1fr));
             row-gap: 5px;
             background-color: var(--nav-hover-color);
             border-radius: 10px;
@@ -419,8 +420,11 @@
                 align-self: center;
             }
 
-            &.project{
-                grid-column: 3/span2;
+            & .project{
+                grid-row: 1 / span 1;
+                grid-column: 4 / span 1;
+                justify-self: stretch;
+                font-size: 0.75em;
             }
 
             & input[type ="button"], input[type="submit"]{
@@ -428,11 +432,10 @@
                 border-radius: 5px;
                 background-color: var(--nav-background-color);
                 padding: 5px 0px 5px 10px;
-                text-align: start;
-                font-size: 1em;
-                width: 100px;
+                font-size: 0.75em;
+                width: 150px;
                 height: 35px;
-                font-size: 0.75rem;
+                font-weight: 900;
                 color: white;
                 display: block;
                 text-align: center;

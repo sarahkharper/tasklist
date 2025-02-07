@@ -210,11 +210,17 @@ export function addTodoToScreen(obj, array, priObj){
     itemContainer.appendChild(elem);
 
     //add edit form to item
-    const editForm = addTodoEditForm(obj);
+    const editForm = addTodoEditForm(obj, array);
     itemContainer.appendChild(editForm);
 }
 
-export function addTodoEditForm(obj){
+//function to filter all project objects from full array
+export function getProjects(array){
+    const projectArray = array.filter((project) => project.getType() === "project");
+    return projectArray;
+}
+
+export function addTodoEditForm(obj, array){
     const formEdit = document.createElement("form");
     formEdit.classList.add(`${obj.getUUID()}`);
     formEdit.classList.add("todo");
@@ -251,7 +257,18 @@ export function addTodoEditForm(obj){
     //make dropdown to select project
     const projectEdit = createNewInput("select", "project", "");
     formEdit.appendChild(projectEdit);
-    //add options for all projects
+    //add option for general tasks
+    const genProj = createNewInput("option", "General", "default");
+    projectEdit.appendChild(genProj);
+    //add project optgroup
+    const optgrp = document.createElement("optgroup");
+    optgrp.setAttribute("label", "Projects");
+    projectEdit.appendChild(optgrp);
+    //add option for each project
+    const projArray = getProjects(array);
+    for(let i = 0; i < projArray.length; i++){
+        addProjToForm(projArray[i]);
+    }
     
     //add close button
     const closeBtn = createNewInput("button", "close", "Cancel");
@@ -266,10 +283,8 @@ export function addTodoEditForm(obj){
 }
 
 function createNewInput(type, name, placeholder){
-    if (type == "textarea"){
-        var newInput = document.createElement("textarea");
-    } else if (type == "select") {
-        var newInput = document.createElement("select");
+    if (type == "textarea" | type == "select" | type == "option"){
+        var newInput = document.createElement(type);
     } else {
         var newInput = document.createElement("input");
         if (type != "date"){
@@ -281,11 +296,15 @@ function createNewInput(type, name, placeholder){
             }
         }
     }
-    newInput.setAttribute("name", name);
+    if (type == "option"){
+        newInput.textContent = name;
+    } else {
+        newInput.setAttribute("name", name);
+    }
     const capname = capitalizeFirstLetter(name);
     if(placeholder == ""){
         newInput.setAttribute("placeholder", `Add ${capname}`);
-    } else if(type == "radio" | type == "submit" | type == "button"){
+    } else if(type == "radio" | type == "submit" | type == "button" | type == "option"){
         newInput.setAttribute("value", placeholder);
     }else {
         newInput.setAttribute("placeholder", placeholder);
@@ -304,7 +323,7 @@ export function capitalizeFirstLetter(strng){
 
 //function to color code elements by project
 function setColorByProject(obj, array){
-    const projects = array.filter((project) => project.getType() === "project");
+    const projects = getProjects(array);
     const targetProj = projects.find((project) => project.getUUID() === obj.project);
     return targetProj.colorInput;
 }
