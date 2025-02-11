@@ -102,6 +102,11 @@ export function updateUI(array){
                 break;
         }
     }
+    //add event listener to all buttons that toggle visibility of todo elements
+    const editBtns = document.querySelectorAll('.toggle-edit');
+    editBtns.forEach(editBtn => {
+        toggleEdit(editBtn, "click");
+    })
 }
 
 //function to show projects in sidebar
@@ -153,6 +158,8 @@ export function addTodoToScreen(obj, array, priObj){
     todoContainer.appendChild(itemContainer);
     const priColor = setColorByPriority(obj, priObj); //get color to go with object priority
     const uuid = obj.getUUID();
+    const elemShowCont = document.createElement("div");
+    itemContainer.appendChild(elemShowCont);
 
     //make new todo element and remove extraneous content
     const elem = makeNewElem(obj);
@@ -203,11 +210,13 @@ export function addTodoToScreen(obj, array, priObj){
     const btnColor = window.getComputedStyle(document.body).getPropertyValue('--accent-color-1');
     const editIcon = makeIcon(["fa-solid", "fa-pen"], btnColor);
     editIcon.classList.add('edit-button');
+    editIcon.classList.add('toggle-edit');
     elem.appendChild(editIcon);
-    //editBtn.appendChild(editIcon);
-    //make edit button hide todo item and show form
+    //add event listener to edit button to hide todo item and show form
+    //toggleEdit(editIcon, "click");
+
     
-    itemContainer.appendChild(elem);
+    elemShowCont.appendChild(elem);
 
     //add edit form to item
     const editForm = addTodoEditForm(obj, array);
@@ -224,6 +233,12 @@ export function addTodoEditForm(obj, array){
     const formEdit = document.createElement("form");
     formEdit.classList.add(`${obj.getUUID()}`);
     formEdit.classList.add("todo");
+    formEdit.classList.add("form-box");
+    
+    //make container for form
+    const formShowCont = document.createElement("div");
+    formShowCont.classList.add("hide");
+    formShowCont.appendChild(formEdit);
 
     //make text input to edit todo name
     const nameEdit = createNewInput("text", "name", obj.name);
@@ -272,14 +287,17 @@ export function addTodoEditForm(obj, array){
     
     //add close button
     const closeBtn = createNewInput("button", "close", "Cancel");
-    closeBtn.classList.add("close-btn");
+    closeBtn.classList.add("close-btn", "toggle-edit");
     formEdit.appendChild(closeBtn);
+    //toggleEdit(closeBtn, "click");
 
     //add submit button
     const submitEdit = createNewInput("submit", "submit", "Save");
+    submitEdit.classList.add("toggle-edit");
     formEdit.appendChild(submitEdit);
+    //toggleEdit(submitEdit, "submit");
 
-    return(formEdit);
+    return(formShowCont);
 }
 
 function createNewInput(type, name, placeholder){
@@ -359,7 +377,18 @@ function makeIcon(iconParams, color){
     return projIcon;
 }
 
-function toggleEdit(editIcon){
-    //write code to hide todo/project display
-    //write code to show todo/project edit form
+function toggleEdit(editIcon, event){
+    //get parent div for all content associated with this todo (display & form)
+    const todoElemCont = editIcon.closest('.todo-entry');
+
+    //get form & display containers as children
+    const todoChildren = todoElemCont.querySelectorAll('.todo-entry > *'); 
+    
+    //add event listener to toggle hide class for child elements
+    editIcon.addEventListener(event, () => {
+        todoChildren.forEach(childCont => {
+            childCont.classList.toggle("hide");
+            if (childCont.nodeName == "FORM") childCont.reset;
+        })
+    })
 }
