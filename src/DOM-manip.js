@@ -140,15 +140,30 @@ function addProjToScreen(obj){
 //function to add projects to dropdown in todo creation form
 function addProjToForm(projOpt, array){
     const projArray = getProjects(array);
+
+    //identify if a project should be selected on default for dropdown
+    const selectedProj = getSelectedProject(projOpt);
     
     for(let i = 0; i < projArray.length; i++){
         const obj = projArray[i];
         const newProj = document.createElement('option'); //create option for new project
         newProj.value = obj.getUUID();
+        if(newProj.value == selectedProj){
+            newProj.selected = true;
+        }
         newProj.text = obj.name;
         newProj.classList.add("proj-opt");
         projOpt.appendChild(newProj);
     }  
+}
+
+function getSelectedProject(elem){
+    //get all classes of element
+    const classList = elem.classList.toString();
+    const classArray = classList.split(' ');
+
+    //get project uuid (first class)
+    return classArray[0];
 }
 
 //function to only show project optgroup if projects have been created
@@ -285,6 +300,7 @@ export function addTodoEditForm(obj, array){
     //add project optgroup
     const optgrp = document.createElement("optgroup");
     optgrp.setAttribute("label", "Projects");
+    optgrp.classList.add(obj.project);
     projectEdit.appendChild(optgrp);
     /*//add option for each project
     const projArray = getProjects(array);
