@@ -94,7 +94,7 @@ export function updateUI(array){
         switch(obj.getType()) {
             case "project":
                 addProjToScreen(obj);
-                addProjToForm(obj);
+                //addProjToForm(obj);
                 break;
             case "todo":
                 addTodoToScreen(obj, array);
@@ -102,6 +102,14 @@ export function updateUI(array){
                 break;
         }
     }
+    //add projects to all project selection dropdowns in DOM
+    //add option for each project
+    const projOpts = document.querySelectorAll('optgroup[label = "Projects"]');
+    projOpts.forEach(projOpt => {
+        addProjToForm(projOpt, array);
+        filterOptgroups(projOpt);
+    })
+
     //add event listener to all buttons that toggle visibility of todo elements
     const editBtns = document.querySelectorAll('.toggle-edit');
     editBtns.forEach(editBtn => {
@@ -130,18 +138,17 @@ function addProjToScreen(obj){
 }
 
 //function to add projects to dropdown in todo creation form
-function addProjToForm(obj){
-    const projOpts = document.querySelectorAll('optgroup[label = "Projects"]');
+function addProjToForm(projOpt, array){
+    const projArray = getProjects(array);
     
-    const newProj = document.createElement('option'); //create option for new project
-    newProj.value = obj.getUUID();
-    newProj.text = obj.name;
-    newProj.classList.add("proj-opt");
-
-    projOpts.forEach(projOpt => {
+    for(let i = 0; i < projArray.length; i++){
+        const obj = projArray[i];
+        const newProj = document.createElement('option'); //create option for new project
+        newProj.value = obj.getUUID();
+        newProj.text = obj.name;
+        newProj.classList.add("proj-opt");
         projOpt.appendChild(newProj);
-        filterOptgroups(projOpt);
-    })
+    }  
 }
 
 //function to only show project optgroup if projects have been created
@@ -279,11 +286,11 @@ export function addTodoEditForm(obj, array){
     const optgrp = document.createElement("optgroup");
     optgrp.setAttribute("label", "Projects");
     projectEdit.appendChild(optgrp);
-    //add option for each project
+    /*//add option for each project
     const projArray = getProjects(array);
     for(let i = 0; i < projArray.length; i++){
         addProjToForm(projArray[i]);
-    }
+    }*/
     
     //add close button
     const closeBtn = createNewInput("button", "close", "Cancel");
