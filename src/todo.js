@@ -1,5 +1,6 @@
 import {projFromForm} from './project-creation.js';
 import {updateUI} from './DOM-manip.js';
+import { addObjToStorage, retrieveObjFromStorage } from './storage-functions.js';
 //import {toggleShow} from "./DOM-manip.js";
 const datefns = require('date-fns');
 
@@ -47,7 +48,7 @@ export function convertTodotoJson(todo){
     return JSON.stringify(jsonTodo);
 }
 
-export function convertJsontoTodo(jsonTodo){
+export function convertJsontoTodo(todo){
     const uuid = todo.uuid;
     const isComplete = todo.isComplete;
 
@@ -88,10 +89,12 @@ export function submitForm(form, type, arrayName){
         } else if(type === "project"){
             var todo = projFromForm(form);
         }
-        //console.log(todo);
-        addObjToArray(arrayName, todo);
+        //add new object to local storage
+        addObjToStorage(todo);
+        //retrieve new array with updated objects
+        let objList = retrieveObjFromStorage(arrayName);
         //console.log(arrayName);
-        updateUI(arrayName);
+        updateUI(objList);
     })
 }
 

@@ -1,5 +1,5 @@
-import { convertJsontoProject } from './project-creation';
-import {addObjToArray, convertJsontoTodo} from './todo.js';
+import { convertJsontoProject, convertProjecttoJson} from './project-creation';
+import {addObjToArray, convertJsontoTodo, convertTodotoJson} from './todo.js';
 
 //check if local storage available
 export function storageAvailable(type) {
@@ -40,10 +40,25 @@ export function retrieveObjFromStorage(todoList){
         }
         addObjToArray(todoList, fullObj);
     }
+    return todoList;
 }
 
-export function addObjToStorage(todoList){
+export function addObjToStorage(obj){
     
+    const uuid = obj.getUUID(); //get uuid to serve as key in storage
+    const type = obj.getType(); //get type to call correct JSON conversion function
+
+    //convert obj to json
+    let jsonObj;
+
+    if(obj.getType() == "todo"){
+        jsonObj = convertTodotoJson(obj);
+    } else {
+        jsonObj = convertProjecttoJson(obj);
+    }
+
+    //add item to local storage
+    localStorage.setItem(uuid, jsonObj);
 }
 
 function convertJsontoObj(obj){

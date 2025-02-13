@@ -6,16 +6,16 @@ import * as storageFunct from "./storage-functions.js";
 import * as domManip from "./DOM-manip.js";
 
 //initialize todoList
-let todoList;
-
+let todoList = [];
+console.log(localStorage.length)
 //initiate local storage and get objects in storage
-if (storageFunct.storageAvailable("localStorage")){
+/*if (storageFunct.storageAvailable("localStorage")){
     localStorage.length > 0 
         ? todoList = storageFunct.retrieveObjFromStorage(todoList)
         : todoList = [];
 } else {
     todoList = [];
-}
+}*/
 
 domManip.updateUI(todoList);
 
