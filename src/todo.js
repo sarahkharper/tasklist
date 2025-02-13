@@ -48,8 +48,6 @@ export function convertTodotoJson(todo){
 }
 
 export function convertJsontoTodo(jsonTodo){
-    const todo = JSON.parse(jsonTodo);
-
     const uuid = todo.uuid;
     const isComplete = todo.isComplete;
 

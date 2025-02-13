@@ -32,7 +32,7 @@ export function convertProjecttoJson(proj){
 
 //create function to convert project from JSON to JS
 export function convertJsontoProject(jsonProj){
-    const proj = JSON.parse(jsonProj);
+    //const proj = JSON.parse(jsonProj);
 
     //add function to access uuid
     const uuid = proj.uuid;

@@ -5,13 +5,17 @@ import {createTodo, todoFromForm, submitForm} from "./todo.js";
 import * as storageFunct from "./storage-functions.js";
 import * as domManip from "./DOM-manip.js";
 
-//initiate local storage and get todos
-//if (storageFunct.storageAvailable("localStorage")){
-  //  if (localStorage.length > 0) ? /*function*/ : todoList = [];
-//} else {
-    const todoList = [];
+//initialize todoList
+let todoList;
 
-//}
+//initiate local storage and get objects in storage
+if (storageFunct.storageAvailable("localStorage")){
+    localStorage.length > 0 
+        ? todoList = storageFunct.retrieveObjFromStorage(todoList)
+        : todoList = [];
+} else {
+    todoList = [];
+}
 
 domManip.updateUI(todoList);
 
