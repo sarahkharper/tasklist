@@ -2,9 +2,16 @@ import "./styles.css";
 import "../node_modules/modern-normalize/modern-normalize.css";
 import "./fa-icons/css/all.css";
 import {createTodo, todoFromForm, submitForm} from "./todo.js";
+import * as storageFunct from "./storage-functions.js";
 import * as domManip from "./DOM-manip.js";
 
-const todoList = [];
+//initiate local storage and get todos
+//if (storageFunct.storageAvailable("localStorage")){
+  //  if (localStorage.length > 0) ? /*function*/ : todoList = [];
+//} else {
+    const todoList = [];
+
+//}
 
 domManip.updateUI(todoList);
 

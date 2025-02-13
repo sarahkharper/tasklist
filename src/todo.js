@@ -74,6 +74,8 @@ export function convertJsontoTodo(jsonTodo){
     delete todo.uuid;
     delete todo.isComplete;
     delete todo.type;
+
+    return todo;
 };
 
 export function addObjToArray(arrayName, objName){
