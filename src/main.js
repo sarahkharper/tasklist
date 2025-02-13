@@ -34,7 +34,7 @@ expandBtns.forEach(expandBtn => {
 })
 
 //add close listener to all close buttons
-const closeBtns = document.querySelectorAll('.close-btn');
+const closeBtns = document.querySelectorAll('.sidenav  .close-btn');
 closeBtns.forEach(closeBtn => {
     domManip.toggleShow(closeBtn, "close", "click");
 })

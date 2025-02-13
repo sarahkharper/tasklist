@@ -414,7 +414,7 @@ function toggleEdit(editIcon, event){
     editIcon.addEventListener(event, () => {
         todoChildren.forEach(childCont => {
             childCont.classList.toggle("hide");
-            if (childCont.nodeName == "FORM") childCont.reset;
+            if (childCont.nodeName == "FORM") {childCont.reset()};
         })
     })
 }
