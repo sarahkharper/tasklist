@@ -115,3 +115,7 @@ export function objFromForm(form){
     return obj;
 }
 
+export function getTodos(array){
+    const todoArray = array.filter((todo) => todo.getType() === "todo");
+    return todoArray;
+}

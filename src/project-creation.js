@@ -31,7 +31,7 @@ export function convertProjecttoJson(proj){
 }
 
 //create function to convert project from JSON to JS
-export function convertJsontoProject(jsonProj){
+export function convertJsontoProject(proj){
     //const proj = JSON.parse(jsonProj);
 
     //add function to access uuid
@@ -46,6 +46,12 @@ export function convertJsontoProject(jsonProj){
     delete proj.type;
     
     return proj;
+}
+
+//function to filter all project objects from full array
+export function getProjects(array){
+    const projectArray = array.filter((project) => project.getType() === "project");
+    return projectArray;
 }
 
 //create function to delete projects (include going back to main task list if deleted project is current display)

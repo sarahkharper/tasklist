@@ -36,7 +36,7 @@ export function retrieveObjFromStorage(array){
         if(obj.type == "todo"){
             fullObj = convertJsontoTodo(obj);
         } else if (obj.type == "project"){
-            fullObj = convertJsontoProject;
+            fullObj = convertJsontoProject(obj);
         } else {
             fullObj = obj;
         }
@@ -54,7 +54,7 @@ export function addObjToStorage(obj){
     //convert obj to json
     let jsonObj;
 
-    if(obj.getType() == "todo"){
+    if(type == "todo"){
         jsonObj = convertTodotoJson(obj);
     } else {
         jsonObj = convertProjecttoJson(obj);

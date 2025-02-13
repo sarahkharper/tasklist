@@ -1,4 +1,7 @@
 import { toggleCompletionStatus, toggleCheck } from './change-status';
+import { getProjects } from './project-creation';
+import { getTodos } from './todo';
+
 
 const datefns = require('date-fns');
 
@@ -103,7 +106,7 @@ export function updateUI(array){
     }
 
     for(const todo of todoArray){
-        addTodoToScreen(todo, todoArray);
+        addTodoToScreen(todo, todoArray, projArray);
     }
 
     //add projects to all project selection dropdowns in DOM
@@ -126,6 +129,7 @@ function addProjToScreen(obj){
     //remove color from textContent
     const elem = makeNewElem(obj);
     removeChildBySelector(elem, ".colorInput");
+    removeChildBySelector(elem, ".timestamp");
 
     const projNav = document.querySelector(".projectNav");
     const projBtn = document.createElement("button");
@@ -177,7 +181,7 @@ function filterOptgroups(projOpt) {
   }
 
 //function to show tasks on screen (incl. parameters to filter by project or date)
-export function addTodoToScreen(obj, array, priObj){
+export function addTodoToScreen(obj, array, projArray, priObj){
     const todoContainer = document.querySelector("#todo-container");
     const itemContainer = document.createElement("div");
     itemContainer.classList.add("todo-entry");
@@ -227,7 +231,7 @@ export function addTodoToScreen(obj, array, priObj){
     projElem.textContent = "";
     //if assigned to a project, add appropriate icon
     if(obj.project !== "default"){
-        const projColor = setColorByProject(obj, array);
+        const projColor = setColorByProject(obj, projArray);
         const projIcon = makeIcon(["fa-solid", "fa-puzzle-piece"], projColor);
         projElem.appendChild(projIcon);
     }
@@ -248,17 +252,6 @@ export function addTodoToScreen(obj, array, priObj){
     //add edit form to item
     const editForm = addTodoEditForm(obj, array);
     itemContainer.appendChild(editForm);
-}
-
-//function to filter all project objects from full array
-export function getProjects(array){
-    const projectArray = array.filter((project) => project.getType() === "project");
-    return projectArray;
-}
-
-export function getTodos(array){
-    const todoArray = array.filter((todo) => todo.getType() === "todo");
-    return todoArray;
 }
 
 export function addTodoEditForm(obj, array){
@@ -374,8 +367,8 @@ export function capitalizeFirstLetter(strng){
 
 //function to color code elements by project
 function setColorByProject(obj, array){
-    const projects = getProjects(array);
-    const targetProj = projects.find((project) => project.getUUID() === obj.project);
+    //const projects = getProjects(array);
+    const targetProj = array.find((project) => project.getUUID() === obj.project);
     return targetProj.colorInput;
 }
 
