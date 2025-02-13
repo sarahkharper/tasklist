@@ -89,19 +89,23 @@ export function updateUI(array){
     //clear all variable UI present in DOM
     clearChangeableUI();
 
-    //get relevant containers in DOM
-    for(const obj of array){
-        switch(obj.getType()) {
-            case "project":
-                addProjToScreen(obj);
-                //addProjToForm(obj);
-                break;
-            case "todo":
-                addTodoToScreen(obj, array);
-                //addTodoEdit(obj, array);
-                break;
-        }
+    const projArray = getProjects(array);
+    sortObjs(projArray, "timestamp");
+
+    const todoArray = getTodos(array);
+    sortObjs(todoArray, "timestamp");
+    //console.log(todoArray);
+
+    //add projects and todos to screen from arrays
+
+    for(const proj of projArray){
+        addProjToScreen(proj);
     }
+
+    for(const todo of todoArray){
+        addTodoToScreen(todo, todoArray);
+    }
+
     //add projects to all project selection dropdowns in DOM
     //add option for each project
     const projOpts = document.querySelectorAll('optgroup[label = "Projects"]');
@@ -186,6 +190,7 @@ export function addTodoToScreen(obj, array, priObj){
     //make new todo element and remove extraneous content
     const elem = makeNewElem(obj);
     removeChildBySelector(elem, ".priority");
+    removeChildBySelector(elem, ".timestamp");
     //elem.classList.add("form-box");
     /*removeChildBySelector(elem, ".project");*/
 
@@ -249,6 +254,11 @@ export function addTodoToScreen(obj, array, priObj){
 export function getProjects(array){
     const projectArray = array.filter((project) => project.getType() === "project");
     return projectArray;
+}
+
+export function getTodos(array){
+    const todoArray = array.filter((todo) => todo.getType() === "todo");
+    return todoArray;
 }
 
 export function addTodoEditForm(obj, array){
@@ -414,4 +424,9 @@ function toggleEdit(editIcon, event){
             if (childCont.nodeName == "FORM") childCont.reset;
         })
     })
+}
+
+//function to sort children of an element by timestamp
+function sortObjs(array, property){
+    array.sort((a,b) => a[property] - b[property]);
 }

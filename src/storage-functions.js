@@ -21,13 +21,15 @@ export function storageAvailable(type) {
     }
 }
 
-export function retrieveObjFromStorage(todoList){
-    todoList = []; //clear current todoList
+export function retrieveObjFromStorage(array){
+    array.length = 0; //clear current todoList
+    console.log(array);
 
     //get all objects from storage and add to todoList
     for (var i = 0; i < localStorage.length; i++) {
         const jobj = localStorage.getItem(localStorage.key(i));
         const obj = convertJsontoObj(jobj);
+        console.log(obj);
         
         let fullObj;
 
@@ -38,9 +40,10 @@ export function retrieveObjFromStorage(todoList){
         } else {
             fullObj = obj;
         }
-        addObjToArray(todoList, fullObj);
+        addObjToArray(array, fullObj);
+        console.log(array);
     }
-    return todoList;
+    return array;
 }
 
 export function addObjToStorage(obj){

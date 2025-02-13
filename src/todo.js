@@ -50,7 +50,7 @@ export function convertTodotoJson(todo){
 
 export function convertJsontoTodo(todo){
     const uuid = todo.uuid;
-    const isComplete = todo.isComplete;
+    let isComplete = todo.isComplete;
 
     //add function to access uuid
     todo.getUUID = () => {
@@ -110,6 +110,7 @@ export function objFromForm(form){
     const formData = new FormData(form);
     //console.log(formData);
     const obj = Object.fromEntries(formData);
+    obj.timestamp = new Date().getTime();
     //console.log(obj);
     return obj;
 }
