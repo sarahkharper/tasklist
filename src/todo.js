@@ -1,4 +1,5 @@
 import {projFromForm} from './project-creation.js';
+import { findObjIdx } from './change-status.js';
 import {updateUI} from './DOM-manip.js';
 import { addObjToStorage, retrieveObjFromStorage } from './storage-functions.js';
 //import {toggleShow} from "./DOM-manip.js";
@@ -12,6 +13,7 @@ export function createTodo (todo){
     
     let isComplete = false;
     const uuid = crypto.randomUUID();
+    todo.timestamp = new Date().getTime();
 
     //add function to access uuid
     todo.getUUID = () => {
@@ -26,10 +28,11 @@ export function createTodo (todo){
     //format deadline date
     if(todo.deadline){
         //console.log(todo.deadline);
-        const rawDate = new Date(todo.deadline.replace(/-/g, '\/').replace(/T.+/, ''));
+        //const rawDate = new Date(todo.deadline.replace(/-/g, '\/').replace(/T.+/, ''));
         //console.log(rawDate);
-        const formattedDate = datefns.format(rawDate, 'MM-dd-yyyy');
+        //const formattedDate = datefns.format(rawDate, 'MM-dd-yyyy');
         //console.log(formattedDate);
+        const formattedDate = dateFormat(todo.deadline);
         todo.deadline = formattedDate;
     }
 
@@ -95,6 +98,62 @@ export function submitForm(form, type, arrayName){
         let objList = retrieveObjFromStorage(arrayName);
         //console.log(arrayName);
         updateUI(objList);
+        return objList;
+    })
+}
+
+
+export function submitEdit(form, array){
+    form.addEventListener("submit", (event) =>{
+        //get todo being edited from array
+        const uuid = form.className.split(' ')[0]; //get uuid from class list
+        const idx = findObjIdx(uuid, array);
+        const oldTodo = array[idx]; //used uuid to get old todo in array
+
+        event.preventDefault();
+        const todoEdit = objFromForm(form) //convert form data to obj
+        const newTodo = updateTodo(oldTodo, todoEdit); //update changed fields in todo obj
+
+        //replace old todo with new todo in local storage
+        addObjToStorage(newTodo);
+        //retrieve updated array
+        let objList = retrieveObjFromStorage(array);
+        //update UI
+        updateUI(objList);
+    })
+}
+
+function updateTodo(oldTodo, todoEdit){
+
+    //iterate through key value pairs in new form data
+    for (let [key, value] of Object.entries(todoEdit)){
+        if(todoEdit[key] !== '' && oldTodo[key] !== value){ //check if same value not present in old todo
+            if(key == "deadline"){
+                oldTodo[key] = dateFormat(value);
+            } else {
+                oldTodo[key] = value; //assign new form value to old todo
+            }
+        }
+    }
+
+    return oldTodo;
+}
+
+export function deleteTodo(deleteTrigger, array, event){
+    deleteTrigger.addEventListener(event, () =>{
+
+        //get parent div to identify associated todo
+        const todoElemCont = deleteTrigger.closest('.todo');
+        
+        //get uuid of todo from class list
+        const uuid = todoElemCont.className.split(' ')[0]; //get uuid from class list
+        //remove item from local storage using uuid
+        localStorage.removeItem(uuid);
+
+        //retrieve updated array
+        let objList = retrieveObjFromStorage(array);
+        //update UI
+        updateUI(objList);
     })
 }
 
@@ -110,7 +169,6 @@ export function objFromForm(form){
     const formData = new FormData(form);
     //console.log(formData);
     const obj = Object.fromEntries(formData);
-    obj.timestamp = new Date().getTime();
     //console.log(obj);
     return obj;
 }
@@ -118,4 +176,9 @@ export function objFromForm(form){
 export function getTodos(array){
     const todoArray = array.filter((todo) => todo.getType() === "todo");
     return todoArray;
+}
+
+function dateFormat(dateString){
+    const rawDate = new Date(dateString.replace(/-/g, '\/').replace(/T.+/, ''));
+    return datefns.format(rawDate, 'MM-dd-yyyy');
 }

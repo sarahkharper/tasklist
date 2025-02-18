@@ -1,6 +1,6 @@
 import { toggleCompletionStatus, toggleCheck } from './change-status';
 import { getProjects } from './project-creation';
-import { getTodos } from './todo';
+import { getTodos, submitEdit, deleteTodo } from './todo';
 
 
 const datefns = require('date-fns');
@@ -95,7 +95,7 @@ export function updateUI(array){
     const projArray = getProjects(array);
     sortObjs(projArray, "timestamp");
 
-    const todoArray = getTodos(array);
+    let todoArray = getTodos(array);
     sortObjs(todoArray, "timestamp");
     //console.log(todoArray);
 
@@ -113,7 +113,7 @@ export function updateUI(array){
     //add option for each project
     const projOpts = document.querySelectorAll('optgroup[label = "Projects"]');
     projOpts.forEach(projOpt => {
-        addProjToForm(projOpt, array);
+        addProjToForm(projOpt, projArray);
         filterOptgroups(projOpt);
     })
 
@@ -122,6 +122,19 @@ export function updateUI(array){
     editBtns.forEach(editBtn => {
         toggleEdit(editBtn, "click");
     })
+
+    //add event listener to forms that update todo entry on submit
+    const editForms = document.querySelectorAll('.todo.form-box');
+    editForms.forEach(editForm => {
+        submitEdit(editForm, todoArray);
+    });
+
+    //add event listener to todo items to delete todo
+    const deleteBtns = document.querySelectorAll('.delete-btn');
+    deleteBtns.forEach(deleteBtn => {
+        deleteTodo(deleteBtn, todoArray, "click");
+    })
+
 }
 
 //function to show projects in sidebar
@@ -246,6 +259,11 @@ export function addTodoToScreen(obj, array, projArray, priObj){
     //add event listener to edit button to hide todo item and show form
     //toggleEdit(editIcon, "click");
 
+    //add delete button
+    const delColor = window.getComputedStyle(document.body).getPropertyValue('--accent-color-2');
+    const delIcon = makeIcon(["fa-solid", "fa-trash-can"], delColor);
+    delIcon.classList.add('delete-btn');
+    elem.appendChild(delIcon);
     
     elemShowCont.appendChild(elem);
 
@@ -257,6 +275,7 @@ export function addTodoToScreen(obj, array, projArray, priObj){
 export function addTodoEditForm(obj, array){
     const formEdit = document.createElement("form");
     formEdit.classList.add(`${obj.getUUID()}`);
+    formEdit.classList.add(`${obj.timestamp}`);
     formEdit.classList.add("todo");
     formEdit.classList.add("form-box");
     

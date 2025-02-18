@@ -11,6 +11,7 @@ function createProj(proj){
     proj = {...proj};
     
     const uuid = crypto.randomUUID();
+    proj.timestamp = new Date().getTime();
 
     //add function to access uuid
     proj.getUUID = () => {
