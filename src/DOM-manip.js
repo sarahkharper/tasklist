@@ -88,14 +88,14 @@ export function clearChangeableUI(){
 }
 
 //function to set all variable UI
-export function updateUI(array){
+export function updateUI(array, uiFilter){
     //clear all variable UI present in DOM
     clearChangeableUI();
 
     const projArray = getProjects(array);
     sortObjs(projArray, "timestamp");
 
-    let todoArray = getTodos(array);
+    let todoArray = getTodos(array, uiFilter);
     sortObjs(todoArray, "timestamp");
     //console.log(todoArray);
 

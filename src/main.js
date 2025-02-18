@@ -17,7 +17,7 @@ if (storageFunct.storageAvailable("localStorage")){
     todoList = [];
 }
 
-domManip.updateUI(todoList);
+domManip.updateUI(todoList, "all");
 
 const formTodo = document.querySelector('#nav-new-task-form');
 submitForm(formTodo, "todo", todoList);
