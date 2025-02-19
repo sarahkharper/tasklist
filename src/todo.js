@@ -1,6 +1,6 @@
 import {projFromForm} from './project-creation.js';
 import { findObjIdx } from './change-status.js';
-import {updateUI} from './DOM-manip.js';
+import {updateUI, getUIFilter} from './DOM-manip.js';
 import { addObjToStorage, retrieveObjFromStorage } from './storage-functions.js';
 //import {toggleShow} from "./DOM-manip.js";
 const datefns = require('date-fns');
@@ -84,7 +84,7 @@ export function addObjToArray(arrayName, objName){
     arrayName.push(objName);
 }
 
-export function submitForm(form, type, arrayName){
+export function submitForm(form, type, arrayName, uiFilter){
     form.addEventListener("submit", (event) =>{
         event.preventDefault();
         if(type === "todo"){
@@ -97,7 +97,8 @@ export function submitForm(form, type, arrayName){
         //retrieve new array with updated objects
         let objList = retrieveObjFromStorage(arrayName);
         //console.log(arrayName);
-        updateUI(objList);
+        const uiFilter = getUIFilter();
+        updateUI(objList, uiFilter);
         return objList;
     })
 }
@@ -119,7 +120,8 @@ export function submitEdit(form, array){
         //retrieve updated array
         let objList = retrieveObjFromStorage(array);
         //update UI
-        updateUI(objList);
+        const uiFilter = getUIFilter();
+        updateUI(objList, uiFilter);
     })
 }
 
@@ -153,7 +155,8 @@ export function deleteTodo(deleteTrigger, array, event){
         //retrieve updated array
         let objList = retrieveObjFromStorage(array);
         //update UI
-        updateUI(objList);
+        const uiFilter = getUIFilter();
+        updateUI(objList, uiFilter);
     })
 }
 

@@ -1,9 +1,19 @@
 import { toggleCompletionStatus, toggleCheck } from './change-status';
 import { getProjects } from './project-creation';
 import { getTodos, submitEdit, deleteTodo } from './todo';
+import { retrieveObjFromStorage } from './storage-functions';
 
 
 const datefns = require('date-fns');
+let uiFilter = "all";
+
+export function setUIFilter(params){
+    uiFilter = params;
+}
+
+export function getUIFilter(){
+    return uiFilter;
+}
 
 //create object storing priority levels and associated colors
 const priObj = {high: "#FF6464", medium: "#FFE162", low: "#91c483", none: "#EEEEEE"};
@@ -156,6 +166,14 @@ function addProjToScreen(obj){
     //add icon to project button
     const projIcon = makeIcon(["fa-solid", "fa-puzzle-piece", "nav-icons"], obj.colorInput);
     projBtn.insertBefore(projIcon, projBtn.firstChild);
+
+    //add event listener to filter display
+    projBtn.addEventListener("click", ()=> {
+        let todoList = [];
+        todoList = retrieveObjFromStorage(todoList);
+        setUIFilter(["project", obj.getUUID()]);
+        updateUI(todoList, uiFilter);
+    })
 }
 
 //function to add projects to dropdown in todo creation form

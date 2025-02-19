@@ -17,14 +17,16 @@ if (storageFunct.storageAvailable("localStorage")){
     todoList = [];
 }
 
-domManip.updateUI(todoList, "all");
+let uiFilter = "all";
+
+domManip.updateUI(todoList, uiFilter);
 
 const formTodo = document.querySelector('#nav-new-task-form');
 submitForm(formTodo, "todo", todoList);
 domManip.toggleShow(formTodo, "close", "submit");
 
 const formProj = document.querySelector('#nav-new-proj-form');
-submitForm(formProj, "project", todoList);
+submitForm(formProj, "project", todoList, uiFilter);
 domManip.toggleShow(formProj, "close", "submit");
 
 //add expand listener to all expand buttons
