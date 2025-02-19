@@ -97,9 +97,9 @@
         background-color: var(--nav-background-color);
         justify-content: start;
         display: grid;
-        overflow: auto;
+        overflow-y: scroll;
         grid-template-rows: 0.5rem max-content min-content auto;
-        height: 100%;
+        height: 100vh;
         position: sticky;
         left: 0px;
         top: 0px;
@@ -332,6 +332,10 @@
             position: relative;
             padding-top: 7vh;
             border-bottom: 1px solid gray;
+            position: sticky;
+            top: 0;
+            z-index:2;
+            background-color: white;
 
             & h1{
                 position: absolute;
@@ -348,6 +352,8 @@
     #todo-container{
         grid-row: 2 / span1;
         grid-column: content;
+        max-height: calc(100vh-200px);
+        overflow-y: scroll;
     }
 
     .todo-entry{
