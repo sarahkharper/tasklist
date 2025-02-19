@@ -323,7 +323,7 @@
     .main{
         display: grid;
         grid-template-columns: 1fr [content-start] 5fr [content-end] 2fr; 
-        grid-template-rows: [header-start] auto [header-end] auto;
+        grid-template-rows: [header-start] 15vh [header-end] auto;
         font-family: var(--nav-content-font);
 
         & .header-container{
@@ -331,6 +331,7 @@
             grid-column: content;
             position: relative;
             padding-top: 7vh;
+            border-bottom: 1px solid gray;
 
             & h1{
                 position: absolute;

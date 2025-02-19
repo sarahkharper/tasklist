@@ -1,4 +1,4 @@
-import { toggleCompletionStatus, toggleCheck } from './change-status';
+import { toggleCompletionStatus, toggleCheck, findObjIdx } from './change-status';
 import { getProjects } from './project-creation';
 import { getTodos, submitEdit, deleteTodo } from './todo';
 import { retrieveObjFromStorage } from './storage-functions';
@@ -109,6 +109,9 @@ export function updateUI(array, uiFilter){
     sortObjs(todoArray, "timestamp");
     //console.log(todoArray);
 
+    //set main container header based on filter
+    setHeader(uiFilter, projArray); 
+
     //add projects and todos to screen from arrays
 
     for(const proj of projArray){
@@ -147,6 +150,19 @@ export function updateUI(array, uiFilter){
 
 }
 
+function setHeader(uiFilter, projArray){
+    const cont = document.querySelector('.header-container');
+    clearAfterNthChild(cont, 0);
+    const hdr = document.createElement("h1");
+    cont.appendChild(hdr);
+    if(uiFilter === "all"){
+        hdr.textContent = "All Tasks";
+    } else {
+        const proj = findObjIdx(uiFilter[1], projArray);
+        hdr.textContent = projArray[proj].name;
+    }
+}
+
 //function to show projects in sidebar
 function addProjToScreen(obj){
     //remove color from textContent
@@ -173,10 +189,10 @@ function addProjToScreen(obj){
     })
 }
 
-export function changeFilter(filter){
+export function changeFilter(newFilter){
     let todoList = [];
     todoList = retrieveObjFromStorage(todoList);
-    setUIFilter(filter);
+    setUIFilter(newFilter);
     updateUI(todoList, uiFilter);
 }
 
