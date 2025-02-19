@@ -169,11 +169,15 @@ function addProjToScreen(obj){
 
     //add event listener to filter display
     projBtn.addEventListener("click", ()=> {
-        let todoList = [];
-        todoList = retrieveObjFromStorage(todoList);
-        setUIFilter(["project", obj.getUUID()]);
-        updateUI(todoList, uiFilter);
+        changeFilter(["project", obj.getUUID()]);
     })
+}
+
+export function changeFilter(filter){
+    let todoList = [];
+    todoList = retrieveObjFromStorage(todoList);
+    setUIFilter(filter);
+    updateUI(todoList, uiFilter);
 }
 
 //function to add projects to dropdown in todo creation form

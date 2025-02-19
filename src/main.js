@@ -41,9 +41,9 @@ closeBtns.forEach(closeBtn => {
     domManip.toggleShow(closeBtn, "close", "click");
 })
 
-//add completion status modifier to all checkboxes
-//const checkboxes = document.querySelectorAll(".change-status-box");
-//checkboxes.forEach(checkbox => {
-    //toggleCompletionStatus(checkbox, todoList);
-   
-//});
+//add "show all tasks" ability to All Tasks button
+const allBtn = document.querySelector('#all-tasks');
+allBtn.addEventListener("click", () => {
+    domManip.changeFilter("all");
+})
+
