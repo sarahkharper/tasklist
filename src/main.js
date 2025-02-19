@@ -52,3 +52,13 @@ const todayBtn = document.querySelector('#today-btn');
 todayBtn.addEventListener("click", () => {
     domManip.changeFilter("today");
 })
+
+const overdueBtn = document.querySelector('#overdue-btn');
+overdueBtn.addEventListener("click", () =>{
+    domManip.changeFilter("overdue");
+})
+
+const upcomingBtn = document.querySelector('#upcoming-btn');
+upcomingBtn.addEventListener("click", () =>{
+    domManip.changeFilter("upcoming");
+})

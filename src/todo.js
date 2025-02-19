@@ -178,11 +178,19 @@ export function objFromForm(form){
 
 export function getTodos(array, uiFilter){
     let todoArray = array.filter((todo) => todo.getType() === "todo");
+    const hoy = datefns.format(new Date(), 'MM-dd-yyyy'); //get today's date, formatted
+    
     if(uiFilter === "all"){
         todoArray = todoArray;
     } else if (uiFilter == "today"){
-        const hoy = datefns.format(new Date(), 'MM-dd-yyyy'); //get today's date, formatted
         todoArray = array.filter((todo) => todo.deadline === hoy);
+    } else if (uiFilter == "overdue"){
+        todoArray = array.filter((todo) => datefns.isBefore(todo.deadline, hoy));
+    } else if (uiFilter == "upcoming"){
+        todoArray = array.filter((todo) => datefns.isWithinInterval(todo.deadline, {
+            start: hoy,
+            end: datefns.addDays(hoy, 7)
+        }))
     }
     else {
         todoArray = array.filter((todo) => todo[uiFilter[0]] === uiFilter[1]);
