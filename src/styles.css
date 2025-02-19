@@ -322,8 +322,31 @@
 
     .main{
         display: grid;
-        grid-template-columns: 1fr 5fr 2fr; 
+        grid-template-columns: 1fr [content-start] 5fr [content-end] 2fr; 
+        grid-template-rows: [header-start] auto [header-end] auto;
         font-family: var(--nav-content-font);
+
+        & .header-container{
+            grid-row: header;
+            grid-column: content;
+            position: relative;
+            padding-top: 7vh;
+
+            & h1{
+                position: absolute;
+                bottom: 0;
+                padding-bottom: 1vh;
+                font-family: var(--logo-font);
+                font-size: calc(var(--root-fontsize)*2);
+                color: black;
+                font-weight: 500;
+            }
+        }
+    }
+
+    #todo-container{
+        grid-row: 2 / span1;
+        grid-column: content;
     }
 
     .todo-entry{
