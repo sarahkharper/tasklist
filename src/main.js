@@ -47,3 +47,8 @@ allBtn.addEventListener("click", () => {
     domManip.changeFilter("all");
 })
 
+//add ability to filter by date conditions to date filtering buttons
+const todayBtn = document.querySelector('#today-btn');
+todayBtn.addEventListener("click", () => {
+    domManip.changeFilter("today");
+})

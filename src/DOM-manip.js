@@ -157,9 +157,11 @@ function setHeader(uiFilter, projArray){
     cont.appendChild(hdr);
     if(uiFilter === "all"){
         hdr.textContent = "All Tasks";
-    } else {
+    } else if (uiFilter[0] == "project") {
         const proj = findObjIdx(uiFilter[1], projArray);
         hdr.textContent = projArray[proj].name;
+    } else {
+        hdr.textContent = capitalizeFirstLetter(uiFilter);
     }
 }
 

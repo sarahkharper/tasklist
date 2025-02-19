@@ -177,11 +177,15 @@ export function objFromForm(form){
 }
 
 export function getTodos(array, uiFilter){
+    let todoArray = array.filter((todo) => todo.getType() === "todo");
     if(uiFilter === "all"){
-        var todoArray = array.filter((todo) => todo.getType() === "todo");
-    } else {
-        var todoArray = array.filter((todo) => todo.getType() === "todo" &&
-        todo[uiFilter[0]] === uiFilter[1]);
+        todoArray = todoArray;
+    } else if (uiFilter == "today"){
+        const hoy = datefns.format(new Date(), 'MM-dd-yyyy'); //get today's date, formatted
+        todoArray = array.filter((todo) => todo.deadline === hoy);
+    }
+    else {
+        todoArray = array.filter((todo) => todo[uiFilter[0]] === uiFilter[1]);
     }
     return todoArray;
 }
