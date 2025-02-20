@@ -26,15 +26,18 @@
           </button>
           <div class="form-box">
             <!--<dialog open>-->
-            <form action="" id="nav-new-task-form">
+            <form action="" id="nav-new-task-form" novalidate>
               <!--<h2>New Book</h2>-->
-              <label for="nameInput"></label>
+              <label for="nameInput">
               <input
                 type="text"
                 name="name"
                 id="nameInput"
+                required
                 placeholder="Task Name (required)"
               />
+              <span class="error"></span>
+              </label>
               <label for="deadline"></label>
               <input
                 type="text"
@@ -55,14 +58,17 @@
                 <option value="default">General Tasks</option>
                 <optgroup label="Projects"></optgroup>
               </select>
-              <label for="noteInput"></label>
-              <textarea
-                rows="20"
-                cols="60"
-                id="noteInput"
-                name="notes"
-                placeholder="Notes (optional)"
-              ></textarea>
+              <label for="noteInput">
+                <textarea
+                    rows="20"
+                    cols="60"
+                    id="noteInput"
+                    name="notes"
+                    placeholder="Notes (optional)"
+                    maxlength = "5"
+                ></textarea>
+                <span class="error"></span>
+              </label>
               <div class="nav-form-button-container">
                 <button type="button" class="close-btn">Close</button>
                 <button type="submit">Add Task</button>
