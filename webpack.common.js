@@ -1,21 +1,23 @@
 // common webpack.js template
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    index: "./src/main.js",
+  },
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist"),
     clean: true,
   },
-  devtool: "eval-source-map",
+  /*devtool: "eval-source-map",*/
   devServer: {
     watchFiles: ["./src/template.html"],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Production',
+      title: "Production",
       template: "./src/template.html",
     }),
   ],
@@ -35,8 +37,8 @@ module.exports = {
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i, //font loader
-        type: 'asset/resource',
-       }
+        type: "asset/resource",
+      },
     ],
   },
 };

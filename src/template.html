@@ -1,109 +1,129 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20,400,0,0&icon_names=add_circle" />    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20,400,0,0&icon_names=add_circle"
+    />
     <!--<link rel = "stylesheet" href = "./fa-icons/css/solid.css";>-->
     <title>TaskList</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="sidenav">
-            <div class="logoNav">
-                <div class="logo">
-                    <p >T<span class = "logo2">L</span>
-                </div>
-                <h1 class="name">tasklist</h1>
-            </div>
-            <div class = "timeNav">
-                    <button class = "form-expand-btn">
-                        <i class="fa-solid fa-square-plus nav-icons"></i>
-                         New Task
-                    </button>
-                    <div class = "form-box">
-                        <!--<dialog open>-->
-                            <form action="" id="nav-new-task-form">
-                                <!--<h2>New Book</h2>-->
-                                <label for="nameInput"></label>
-                                <input type="text" name="name" id="nameInput" placeholder="Task Name (required)">
-                                <label for="deadline"></label>
-                                <input type="text" 
-                                    id="deadline" 
-                                    name="deadline" 
-                                    placeholder="Deadline (optional)" 
-                                    onfocus="(this.type='date')"
-                                />
-                                <label for="priorityInput"></label>
-                                <select name="priority" id="priorityInput">
-                                    <option value="none">No Priority</option>
-                                    <option value="high">High</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="low">Low</option>
-                                </select>
-                                <label for="projectInput"></label>
-                                <select name="project" id="projectInput">
-                                    <option value="default">General Tasks</option>
-                                    <optgroup label = "Projects">
-
-                                    </optgroup>
-                                </select>
-                                <label for="noteInput"></label>
-                                <textarea rows="20" cols="60" id="noteInput" name="notes" placeholder="Notes (optional)"></textarea>
-                                <div class = "nav-form-button-container">
-                                    <button type = "button" class = "close-btn">Close</button>
-                                    <button type = "submit">Add Task</button>
-                                </div>
-                            </form>
-                        <!--</dialog>-->
-                    </div>
-                <button id = "all-tasks">
-                    <i class = "fa-solid fa-list-check nav-icons"></i>
-                    All Tasks
-                </button>
-                <button id = "today-btn"> 
-                    <i class="fa-solid fa-calendar-day nav-icons"></i>
-                    Today
-                </button>
-                <button id = "upcoming-btn">
-                    <i class="fa-solid fa-calendar-days nav-icons"></i>
-                    Upcoming
-                </button>
-                <button id = "overdue-btn">
-                    <i class="fa-solid fa-clock nav-icons"></i>
-                    Overdue
-                </button>
-            </div>
-            <div class="projectNav">
-                <h2>Projects</h2>
-                <button class = "form-expand-btn">
-                    <i class="fa-solid fa-square-plus nav-icons"></i> 
-                    New Project
-                </button>
-                <div class = "form-box">
-                    <!--<dialog open>-->
-                        <form action="" id="nav-new-proj-form">
-                            <label for="projName"></label>
-                                <input type="text" name="name" id="projName" placeholder="Name (required)">
-                                <div class = "side-by-side">
-                                    <label for = "colorInput">Color: </label>
-                                    <input type = "color" id = "colorInput" name = "colorInput" value="#00fbff">
-                                </div>
-                                <div class = "nav-form-button-container">
-                                    <button type = "button" class = "close-btn">Close</button>
-                                    <button type = "submit">Add Project</button>
-                                </div>
-                        </form>
-                </div>
-            </div>
+      <div class="sidenav">
+        <div class="logoNav">
+          <div class="logo">
+            <p>T<span class="logo2">L</span></p>
+          </div>
+          <h1 class="name">tasklist</h1>
         </div>
-        <div class="main">
-            <div class="header-container">
-            </div>
-            <div id="todo-container">
-
-            </div>
+        <div class="timeNav">
+          <button class="form-expand-btn">
+            <i class="fa-solid fa-square-plus nav-icons"></i>
+            New Task
+          </button>
+          <div class="form-box">
+            <!--<dialog open>-->
+            <form action="" id="nav-new-task-form">
+              <!--<h2>New Book</h2>-->
+              <label for="nameInput"></label>
+              <input
+                type="text"
+                name="name"
+                id="nameInput"
+                placeholder="Task Name (required)"
+              />
+              <label for="deadline"></label>
+              <input
+                type="text"
+                id="deadline"
+                name="deadline"
+                placeholder="Deadline (optional)"
+                onfocus="(this.type='date')"
+              />
+              <label for="priorityInput"></label>
+              <select name="priority" id="priorityInput">
+                <option value="none">No Priority</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+              <label for="projectInput"></label>
+              <select name="project" id="projectInput">
+                <option value="default">General Tasks</option>
+                <optgroup label="Projects"></optgroup>
+              </select>
+              <label for="noteInput"></label>
+              <textarea
+                rows="20"
+                cols="60"
+                id="noteInput"
+                name="notes"
+                placeholder="Notes (optional)"
+              ></textarea>
+              <div class="nav-form-button-container">
+                <button type="button" class="close-btn">Close</button>
+                <button type="submit">Add Task</button>
+              </div>
+            </form>
+            <!--</dialog>-->
+          </div>
+          <button id="all-tasks">
+            <i class="fa-solid fa-list-check nav-icons"></i>
+            All Tasks
+          </button>
+          <button id="today-btn">
+            <i class="fa-solid fa-calendar-day nav-icons"></i>
+            Today
+          </button>
+          <button id="upcoming-btn">
+            <i class="fa-solid fa-calendar-days nav-icons"></i>
+            Upcoming
+          </button>
+          <button id="overdue-btn">
+            <i class="fa-solid fa-clock nav-icons"></i>
+            Overdue
+          </button>
         </div>
+        <div class="projectNav">
+          <h2>Projects</h2>
+          <button class="form-expand-btn">
+            <i class="fa-solid fa-square-plus nav-icons"></i>
+            New Project
+          </button>
+          <div class="form-box">
+            <!--<dialog open>-->
+            <form action="" id="nav-new-proj-form">
+              <label for="projName"></label>
+              <input
+                type="text"
+                name="name"
+                id="projName"
+                placeholder="Name (required)"
+              />
+              <div class="side-by-side">
+                <label for="colorInput">Color: </label>
+                <input
+                  type="color"
+                  id="colorInput"
+                  name="colorInput"
+                  value="#00fbff"
+                />
+              </div>
+              <div class="nav-form-button-container">
+                <button type="button" class="close-btn">Close</button>
+                <button type="submit">Add Project</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="main">
+        <div class="header-container"></div>
+        <div id="todo-container"></div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
