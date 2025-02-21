@@ -40,8 +40,16 @@ export function toggleShow(elem, type, event) {
   const formRef = formContainer.querySelector("form");
 
   elem.addEventListener(event, () => {
-    formContainer.classList.toggle("show");
-    formRef.reset();
+    if (type === "close" && event === "submit"){
+        if (!formRef.checkValidity()){
+            return;
+        } 
+    } else{
+        formContainer.classList.toggle("show");
+        const errors = formRef.querySelectorAll(".error");
+        errors.forEach((error) => error.classList.remove('active'));
+        formRef.reset();
+    }
   });
 }
 

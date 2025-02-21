@@ -7,6 +7,7 @@ import {
   retrieveObjFromStorage,
 } from "./storage-functions.js";
 import { updateUI, toggleShow, changeFilter } from "./DOM-manip.js";
+import { addValidation } from "./form-validation.js";
 
 //initialize todoList
 let todoList = [];
@@ -25,6 +26,8 @@ let uiFilter = "all";
 updateUI(todoList, uiFilter);
 
 const formTodo = document.querySelector("#nav-new-task-form");
+const nameInput = document.querySelector('input#nameInput');
+addValidation(formTodo, nameInput, 'required');
 submitForm(formTodo, "todo", todoList);
 toggleShow(formTodo, "close", "submit");
 

@@ -229,6 +229,33 @@ input[type="date"] {
   color: gray;
 }
 
+input:invalid {
+    border-color: red;
+  }
+
+input:focus:invalid {
+outline: none;
+}
+
+.error {
+    display: none;
+
+    width: 100%;
+    padding: 0;
+  
+    font-size: calc(var(--root-fontsize)*.65);
+    color: white;
+    background-color: var(--accent-color-2);
+    border-radius: 0 0 5px 5px;
+  
+    box-sizing: border-box;
+  }
+  
+  .error.active {
+    padding: 0.3em;
+    display: block;
+  }
+
 .form-box {
   display: none;
 

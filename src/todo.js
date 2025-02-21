@@ -96,6 +96,9 @@ export function addObjToArray(arrayName, objName) {
 export function submitForm(form, type, arrayName, uiFilter) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
+    if (!form.checkValidity()) {
+        return;
+    }
     if (type === "todo") {
       var todo = todoFromForm(form);
     } else if (type === "project") {
