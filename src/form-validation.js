@@ -1,6 +1,6 @@
 import { submitForm } from "./todo";
 
-export function addSubmitValidation(formElem, inputElem, array){
+export function addSubmitValidation(formElem, inputElem){
     formElem.addEventListener("submit", (event) => {
         if(!inputElem.validity.valid) {
             //display error message

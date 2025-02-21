@@ -403,6 +403,7 @@ function addTodoEditForm(obj, array) {
   formEdit.appendChild(submitEdit);
   //toggleEdit(submitEdit, "submit");
 
+
   return formShowCont;
 }
 
@@ -499,8 +500,8 @@ function toggleEdit(editIcon, event) {
   //add event listener to toggle hide class for child elements
   editIcon.addEventListener(event, () => {
     todoChildren.forEach((childCont) => {
-      childCont.classList.toggle("hide");
-      if (childCont.nodeName == "FORM") {
+        childCont.classList.toggle("hide");
+        if (childCont.nodeName == "FORM") {
         childCont.reset();
       }
     });

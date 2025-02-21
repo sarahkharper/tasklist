@@ -123,6 +123,7 @@ export function submitEdit(form, array) {
     const oldTodo = array[idx]; //used uuid to get old todo in array
 
     event.preventDefault();
+
     const todoEdit = objFromForm(form); //convert form data to obj
     const newTodo = updateTodo(oldTodo, todoEdit); //update changed fields in todo obj
 

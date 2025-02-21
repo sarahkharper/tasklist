@@ -28,7 +28,7 @@ updateUI(todoList, uiFilter);
 const formTodo = document.querySelector("#nav-new-task-form");
 const nameInput = document.querySelector('input#nameInput');
 const noteInput = document.querySelector('textarea');
-addSubmitValidation(formTodo, nameInput, todoList);
+addSubmitValidation(formTodo, nameInput);
 addTypingValidation(formTodo, noteInput);
 submitForm(formTodo, "todo", todoList);
 toggleShow(formTodo, "close", "submit");
