@@ -40,15 +40,15 @@ export function toggleShow(elem, type, event) {
   const formRef = formContainer.querySelector("form");
 
   elem.addEventListener(event, () => {
-    if (type === "close" && event === "submit"){
-        if (!formRef.checkValidity()){
-            return;
-        } 
-    } else{
-        formContainer.classList.toggle("show");
-        const errors = formRef.querySelectorAll(".error");
-        errors.forEach((error) => error.classList.remove('active'));
-        formRef.reset();
+    if (type === "close" && event === "submit") {
+      if (!formRef.checkValidity()) {
+        return;
+      }
+    } else {
+      formContainer.classList.toggle("show");
+      const errors = formRef.querySelectorAll(".error");
+      errors.forEach((error) => error.classList.remove("active"));
+      formRef.reset();
     }
   });
 }
@@ -403,7 +403,6 @@ function addTodoEditForm(obj, array) {
   formEdit.appendChild(submitEdit);
   //toggleEdit(submitEdit, "submit");
 
-
   return formShowCont;
 }
 
@@ -500,8 +499,8 @@ function toggleEdit(editIcon, event) {
   //add event listener to toggle hide class for child elements
   editIcon.addEventListener(event, () => {
     todoChildren.forEach((childCont) => {
-        childCont.classList.toggle("hide");
-        if (childCont.nodeName == "FORM") {
+      childCont.classList.toggle("hide");
+      if (childCont.nodeName == "FORM") {
         childCont.reset();
       }
     });
